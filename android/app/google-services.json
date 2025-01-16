@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "746015811827",
+    "project_id": "tuskforce-aimecesairem",
+    "storage_bucket": "tuskforce-aimecesairem.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746015811827:android:7b31071bf039f223216f86",
+        "android_client_info": {
+          "package_name": "com.aimecesairem.tusk_force"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxvvDpd4wc5IWiF1isx2dld3jKLAuwgTA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
