@@ -77,3 +77,7 @@ flutter:
     - assets/images/login-wallpaper-winter.jpeg
     - assets/images/login-wallpaper-summer.jpeg
     - assets/images/login-wallpaper-fall.jpeg
+    - assets/images/tuskforce-icon-amherst.png
+    - assets/images/tuskforce-icon-warm.png
+    - assets/images/tuskforce-icon-cool.png
+    - assets/images/tuskforce-hero-amherst.png

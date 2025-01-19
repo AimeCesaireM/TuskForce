@@ -20,34 +20,53 @@ class MyApp extends StatelessWidget {
         future: _initialization,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const MaterialApp(
-                home: Scaffold(
-                    body: Center(
-                        child: Text('Loading Tusks...',
-                            style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Roboto')))));
+            return MaterialApp(home: Scaffold(
+              body: Center(
+                child: Text(
+                  'Loading TuskForce...',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontFamily: 'Roboto',
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            ));
           } else if (snapshot.hasError) {
             return const MaterialApp(
                 home: Scaffold(
                     body: Center(
-                        child: Text('Oops! Error loading your Tusks',
+                        child: Text('Error loading TuskForce.',
                             style: TextStyle(
-                                color: Colors.blue,
-                                fontSize: 40,
-                                fontWeight: FontWeight.bold)))));
+                              color: Colors.blue,
+                              fontFamily: 'Roboto',
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            )))));
           }
           return MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'Tusk Force',
+              title: 'TuskForce',
               theme: ThemeData(
-                scaffoldBackgroundColor: Colors.blueGrey.shade800,
+                textTheme: GoogleFonts.robotoTextTheme(),
+                scaffoldBackgroundColor: Colors.deepPurple.shade100,
                 primarySwatch: Colors.blue,
+                colorScheme: ColorScheme.fromSwatch(
+                  primarySwatch: Colors.blue,
+                ).copyWith(
+                  secondary: Colors.amber, // Accent color
+                ),
+                elevatedButtonTheme: ElevatedButtonThemeData(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  ),
+                ),
+
               ),
-              home: Login()
-          );
+
+              home: Login());
         });
   }
 }
