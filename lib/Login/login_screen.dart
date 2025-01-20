@@ -7,26 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:tusk_force/ForgetPassword/forget_password_screen.dart';
 import 'package:tusk_force/Services/global_methods.dart';
 import 'package:tusk_force/Services/global_variables.dart';
-import 'package:tusk_force/SignUpPage/signup_screen.dart';
+import 'package:tusk_force/SignUp/sign_up_names_screen.dart';
 
-bool containsSpecialCharacter(String input) {
-  final specialCharacterRegex = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
-  return specialCharacterRegex.hasMatch(input);
-}
-
-bool containsDigit(String input) {
-  final digitRegex = RegExp(r'\d');
-  return digitRegex.hasMatch(input);
-}
-
-class Login extends StatefulWidget {
-  const Login({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginState extends State<Login> with TickerProviderStateMixin {
+class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin {
   late Animation<double> _animation;
   late AnimationController _animationController;
 
@@ -120,7 +110,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    String iconURL = loginWallpaperFallFirebase;
+    String iconURL = loginWallpaperSummerFirebase;
 
     // Conditional rendering of the loading screen based on the wallpaper
 
@@ -131,18 +121,19 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
     double height = MediaQuery.of(context).size.height;
 
     if (iconURL == loginWallpaperWinterFirebase) {
-      conditionalProgressBgColor = Colors.lightBlue.shade100;
+      conditionalProgressBgColor = Colors.lightBlue.shade200;
       conditionalLogoPath = logoCoolPath;
     } else if (iconURL == loginWallpaperSummerFirebase) {
-      conditionalProgressBgColor = Colors.brown.shade100;
+      conditionalProgressBgColor = Colors.brown.shade200;
       conditionalLogoPath = logoWarmPath;
     } else {
-      conditionalProgressBgColor = Colors.lightGreenAccent.shade100;
+      conditionalProgressBgColor = Colors.lightGreen.shade200;
       conditionalLogoPath = logoWarmPath;
     }
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Login'),
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -163,7 +154,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
           ),
           Container(
               child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 50),
             child: ListView(
               children: [
                 Padding(
@@ -197,8 +188,9 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                           },
                           style: const TextStyle(color: Colors.black, fontFamily: 'Roboto'),
                           decoration: InputDecoration(
-                              hintText: 'My Amherst College Email Address',
-                              hintStyle: TextStyle(color: Colors.black87, fontFamily: 'Roboto'),
+                              labelText: 'Amherst College Email',
+                              labelStyle: TextStyle(color: Colors.black, fontFamily: 'Roboto'),
+                              // hintStyle: TextStyle(color: Colors.black87, fontFamily: 'Roboto'),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                               ),
@@ -221,6 +213,9 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                             if (value!.isEmpty || value.length < 6) {
                               return 'Your Password is at least six characters';
                             }
+                            if (value.contains(' ')) {
+                              return 'Password cannot contain spaces';
+                            }
                             return null;
                           },
                           style: const TextStyle(color: Colors.black, fontFamily: 'Roboto'),
@@ -238,8 +233,9 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                   color: Colors.black87,
                                 ),
                               ),
-                              hintText: 'My TuskForce Password',
-                              hintStyle: TextStyle(color: Colors.black87, fontFamily: 'Roboto'),
+                              labelText: 'TuskForce Password',
+                              labelStyle: TextStyle(color: Colors.black, fontFamily: 'Roboto'),
+
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                               ),
@@ -308,9 +304,9 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                       TextSpan(
                                         text: 'New to TuskForce? ',
                                         style: TextStyle(
-                                            color: Colors.deepPurple.shade900,
+                                            color: Colors.red,
                                             fontSize: 16,
-                                            fontWeight: FontWeight.w500,
+                                            fontWeight: FontWeight.bold,
                                             fontFamily: 'Roboto'
                                         ),
                                       ),
@@ -323,7 +319,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => SignUp()));
+                                            builder: (context) => SignUpNamesScreen()));
                                   },
                                   style:
                                       ElevatedButton.styleFrom(

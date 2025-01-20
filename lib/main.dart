@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:tusk_force/PostSignUp/optional_username_screen.dart';
 import '../Services/global_variables.dart';
-import 'LoginPage/login_screen.dart';
+import 'Login/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
         future: _initialization,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return MaterialApp(home: Scaffold(
+            return MaterialApp(
+                home: Scaffold(
               body: Center(
                 child: Text(
                   'Loading TuskForce...',
@@ -49,24 +51,34 @@ class MyApp extends StatelessWidget {
               title: 'TuskForce',
               theme: ThemeData(
                 textTheme: GoogleFonts.robotoTextTheme(),
-                scaffoldBackgroundColor: Colors.deepPurple.shade100,
+                scaffoldBackgroundColor: Colors.purple.shade100,
                 primarySwatch: Colors.blue,
                 colorScheme: ColorScheme.fromSwatch(
                   primarySwatch: Colors.blue,
                 ).copyWith(
                   secondary: Colors.amber, // Accent color
                 ),
+                appBarTheme: AppBarTheme(
+                  backgroundColor: Colors.white70, // AppBar background color
+                  foregroundColor: Colors.deepPurple.shade900, // Text and icon color
+                  elevation: 4.0, // Shadow below the AppBar
+                  centerTitle: true, // Centers the title
+                  titleTextStyle: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurple.shade900,
+                  ),
+                ),
                 elevatedButtonTheme: ElevatedButtonThemeData(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   ),
                 ),
-
               ),
-
-              home: Login());
+              // home: OptionalUsernameScreen(data: {})
+            home: OptionalUsernameScreen(data: {}),
+          );
         });
   }
 }

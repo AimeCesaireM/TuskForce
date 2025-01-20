@@ -57,4 +57,27 @@ class GlobalMethods {
           );
         });
   }
+
+  static bool containsSpecialCharacter(String input) {
+    final specialCharacterRegex = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
+    return specialCharacterRegex.hasMatch(input);
+  }
+
+  static bool containsDigit(String input) {
+    final digitRegex = RegExp(r'\d');
+    return digitRegex.hasMatch(input);
+  }
+
+  static Widget signUpHeaderText(String message) {
+    return Text(
+      message,
+      style: const TextStyle(
+        fontFamily:  'Roboto',
+        fontSize: 30,
+        fontWeight: FontWeight.bold,
+        color: Colors.black87, // Slightly muted black for better readability
+      ),
+      textAlign: TextAlign.center,
+    );
+  }
 }
