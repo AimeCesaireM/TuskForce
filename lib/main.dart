@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:tusk_force/PostSignUp/optional_username_screen.dart';
 import '../Services/global_variables.dart';
-import 'Login/login_screen.dart';
+import 'SignUp/sign_in_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,11 +72,14 @@ class MyApp extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     foregroundColor: Colors.white,
+                    shape: ContinuousRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
                   ),
                 ),
               ),
               // home: OptionalUsernameScreen(data: {})
-            home: OptionalUsernameScreen(data: {}),
+            home: SignInScreen(),
           );
         });
   }

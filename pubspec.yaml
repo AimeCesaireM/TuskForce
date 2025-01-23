@@ -47,6 +47,8 @@ dependencies:
   cloud_firestore: ^5.6.1
   firebase_storage: ^12.4.0
   google_fonts: ^6.2.1
+  google_sign_in: ^5.0.7
+  sign_in_with_apple: ^6.1.4
 
 
 
@@ -81,3 +83,4 @@ flutter:
     - assets/images/tuskforce-icon-warm.png
     - assets/images/tuskforce-icon-cool.png
     - assets/images/tuskforce-hero-amherst.png
+    - assets/images/google_logo.png

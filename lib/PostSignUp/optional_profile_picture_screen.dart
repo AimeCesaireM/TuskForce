@@ -1,56 +1,145 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'dart:io';
 
-class OptionalProfilePictureScreen extends StatefulWidget {
-  final Map<String, String> data;
+import '../Services/global_methods.dart';
 
-  const OptionalProfilePictureScreen({required this.data, super.key});
+class OptionalProfilePictureScreen extends StatefulWidget {
+  const OptionalProfilePictureScreen({super.key});
 
   @override
-  State<OptionalProfilePictureScreen> createState() => _OptionalProfilePictureScreenState();
+  State<OptionalProfilePictureScreen> createState() =>
+      _OptionalProfilePictureScreenState();
 }
 
-class _OptionalProfilePictureScreenState extends State<OptionalProfilePictureScreen> {
-  File? _profilePicture;
+class _OptionalProfilePictureScreenState
+    extends State<OptionalProfilePictureScreen> with TickerProviderStateMixin {
+  File? imageFile;
 
-  Future<void> _pickAndCropImage() async {
-    try {
-      // Open the image picker
-      final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (pickedFile != null) {
-        // Crop the image in a circular shape
-        final croppedFile = await ImageCropper().cropImage(
-          sourcePath: pickedFile.path,
-          // cropStyle: CropStyle.circle,
-          aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _isLoading = false;
+  String? imageUrl;
 
-          uiSettings: [
-            AndroidUiSettings(
-              toolbarTitle: 'Crop Profile Picture',
-              toolbarColor: Colors.deepPurple,
-              toolbarWidgetColor: Colors.white,
-              lockAspectRatio: true,
-            ),
-            IOSUiSettings(
-              title: 'Crop Profile Picture',
-            ),
-          ],
-        );
+  void _showImageDialog() {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              title: Text(
+                'Choose an option',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.deepPurple.shade900,
+                ),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Divider(color: Colors.deepPurple.shade100),
+                  ListTile(
+                    leading: Icon(
+                      Icons.camera_alt_rounded,
+                      color: Colors.deepPurple.shade900,
+                    ),
+                    title: Text(
+                      'Take a Picture',
+                      style: TextStyle(
+                        color: Colors.deepPurple.shade900,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    onTap: () {
+                      _getFromCamera();
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.photo_library_rounded,
+                      color: Colors.deepPurple.shade900,
+                    ),
+                    title: Text(
+                      'Gallery',
+                      style: TextStyle(
+                        color: Colors.deepPurple.shade900,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    onTap: () {
+                      _getFromGallery();
+                    },
+                  ),
+                ],
+              ),
+            ));
+  }
 
-        if (croppedFile != null) {
-          setState(() {
-            _profilePicture = File(croppedFile.path);
-          });
-        }
-      }
-    } catch (e) {
-      // Handle errors if any
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to pick or crop image: $e')),
-      );
+  void _getFromCamera() async {
+    XFile? pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    _cropImage(pickedFile!.path);
+    Navigator.pop(context);
+  }
+
+  void _getFromGallery() async {
+    XFile? pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    _cropImage(pickedFile!.path);
+    Navigator.pop(context);
+  }
+
+  void _cropImage(filePath) async {
+    CroppedFile? croppedImage = await ImageCropper().cropImage(
+      sourcePath: filePath,
+      maxHeight: 1080,
+      maxWidth: 1080,
+      // aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+    );
+    if (croppedImage != null) {
+      setState(() {
+        imageFile = File(croppedImage.path);
+      });
     }
+  }
+
+  void _submitImage() async {
+    if (imageFile != null) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      try {
+        final User? user = _auth.currentUser;
+        final _uid = user!.uid;
+
+        if (imageFile != null) {
+          final ref = FirebaseStorage.instance
+              .ref()
+              .child('userImages')
+              .child('$_uid.jpg');
+          await ref.putFile(imageFile!);
+          imageUrl = await ref.getDownloadURL();
+          FirebaseFirestore.instance.collection('users').doc(_uid).update(({
+                'profile': imageUrl,
+              }));
+        }
+      } catch (error) {
+        setState(() {
+          _isLoading = false;
+        });
+        GlobalMethods.showErrorDialog(error: error.toString(), ctx: context);
+      }
+    }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -75,21 +164,23 @@ class _OptionalProfilePictureScreenState extends State<OptionalProfilePictureScr
             ),
             const SizedBox(height: 40),
             GestureDetector(
-              onTap: _pickAndCropImage,
+              onTap: _showImageDialog,
               child: CircleAvatar(
-                radius: 80,
+                radius: 120,
                 backgroundColor: Colors.lightBlue.shade100,
-                backgroundImage: _profilePicture != null
-                    ? FileImage(_profilePicture!)
-                    : null,
-                child: _profilePicture == null
-                    ? Icon(Icons.add_a_photo_rounded, size: 60, color: Colors.grey.shade700)
+                backgroundImage:
+                    imageFile != null ? FileImage(imageFile!) : null,
+                child: imageFile == null
+                    ? Icon(Icons.add_a_photo_rounded,
+                        size: 60, color: Colors.grey.shade700)
                     : null,
               ),
             ),
             SizedBox(height: 20),
             Text(
-              'Tap the circle to upload a profile picture',
+              imageFile == null
+                  ? 'Tap the circle to upload a profile picture'
+                  : '',
               style: TextStyle(fontSize: 16, color: Colors.grey.shade800),
               textAlign: TextAlign.center,
             ),
@@ -97,23 +188,26 @@ class _OptionalProfilePictureScreenState extends State<OptionalProfilePictureScr
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                FloatingActionButton(
-                  onPressed: () {
-                    final profileData = {
-                      ...widget.data,
-                      if (_profilePicture != null) 'profilePicture': _profilePicture!.path,
-                    };
+                _isLoading
+                    ? const CircularProgressIndicator(
+                        color: Colors.deepPurple,
+                      )
+                    : FloatingActionButton(
+                        onPressed: () {
+                          _submitImage();
 
-                    // Navigate to the next screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NextScreen(data: profileData), // Replace with your next screen
+                          // Navigate to the next screen
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NextScreen(
+                                  data: {}), // Replace with your next screen
+                            ),
+                          );
+                        },
+                        child: const Icon(Icons.arrow_forward,
+                            color: Colors.white),
                       ),
-                    );
-                  },
-                  child: const Icon(Icons.arrow_forward, color: Colors.white),
-                ),
               ],
             ),
           ],

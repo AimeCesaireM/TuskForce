@@ -12,7 +12,20 @@
           "package_name": "com.aimecesairem.tusk_force"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "746015811827-76n78d9ie4lcif2mi0gfj0ci79lhje2h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aimecesairem.tusk_force",
+            "certificate_hash": "2169df639357fa2078858c78714d2003bc61a313"
+          }
+        },
+        {
+          "client_id": "746015811827-3iv6n9kg492jisi6n6too86e1dk7h8t0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDxvvDpd4wc5IWiF1isx2dld3jKLAuwgTA"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746015811827-3iv6n9kg492jisi6n6too86e1dk7h8t0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "746015811827-n80i5ad23mfb9ul0p0ksnhmjq63b67mq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aimecesairem.tuskForce"
+              }
+            }
+          ]
         }
       }
     }
