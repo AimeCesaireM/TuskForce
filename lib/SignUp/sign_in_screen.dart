@@ -12,7 +12,8 @@ class SignInScreen extends StatefulWidget {
   _SignInScreenState createState() => _SignInScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> with TickerProviderStateMixin{
+class _SignInScreenState extends State<SignInScreen>
+    with TickerProviderStateMixin {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
@@ -35,13 +36,15 @@ class _SignInScreenState extends State<SignInScreen> with TickerProviderStateMix
         return; // The user canceled the sign-in
       }
 
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
       final User? user = userCredential.user;
 
       if (user != null) {
@@ -55,7 +58,8 @@ class _SignInScreenState extends State<SignInScreen> with TickerProviderStateMix
           await _auth.signOut();
           _googleSignIn.signOut();
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Please use your Amherst College email address')),
+            SnackBar(
+                content: Text('Please use your Amherst College email address')),
           );
         }
       }
@@ -70,80 +74,27 @@ class _SignInScreenState extends State<SignInScreen> with TickerProviderStateMix
     }
   }
 
-  Future<void> _signInWithApple() async {
-    if (Platform.isAndroid) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Apple Sign-In is not available on the Android app.'
-            ' Please use Google Sign-In.')),
-      );
-      return;
-    }
-
-    setState(() {
-      _isLoading = true;
-    });
-
-    try {
-      final appleCredential = await SignInWithApple.getAppleIDCredential(
-        scopes: [
-          AppleIDAuthorizationScopes.email,
-          AppleIDAuthorizationScopes.fullName,
-        ],
-      );
-
-      final oauthCredential = OAuthProvider("apple.com").credential(
-        idToken: appleCredential.identityToken,
-        accessToken: appleCredential.authorizationCode,
-      );
-
-      final UserCredential userCredential = await _auth.signInWithCredential(oauthCredential);
-      final User? user = userCredential.user;
-
-      if (user != null) {
-        if (user.email != null && user.email!.endsWith('@amherst.edu')) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Signed in as ${user.email}')),
-          );
-          // Navigate to the next screen or perform other actions
-        } else {
-          await user.delete();
-          await _auth.signOut();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Please use your Amherst College email address')),
-          );
-        }
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to sign in with Apple: $e')),
-      );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
   @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
   }
+
   @override
   void initState() {
     _animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 20));
     _animation =
-    CurvedAnimation(parent: _animationController, curve: Curves.linear)
-      ..addListener(() {
-        setState(() {});
-      })
-      ..addStatusListener((animationStatus) {
-        if (animationStatus == AnimationStatus.completed) {
-          _animationController.reset();
-          _animationController.forward();
-        }
-      });
+        CurvedAnimation(parent: _animationController, curve: Curves.linear)
+          ..addListener(() {
+            setState(() {});
+          })
+          ..addStatusListener((animationStatus) {
+            if (animationStatus == AnimationStatus.completed) {
+              _animationController.reset();
+              _animationController.forward();
+            }
+          });
 
     _animationController.forward();
     super.initState();
@@ -152,72 +103,53 @@ class _SignInScreenState extends State<SignInScreen> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     String iconURL = loginWallpaperSummerFirebase;
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Sign In")),
-      body: Stack(
-        children: [
-          CachedNetworkImage(
-            imageUrl: iconURL,
-            errorWidget: (context, url, error) => Icon(Icons.error),
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
-            alignment: FractionalOffset(_animation.value, 0),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 300, horizontal: 40),
-            child: _isLoading
-                ? Center(child: CircularProgressIndicator())
-                : ListView(
-              children: [
-                ElevatedButton.icon(
-                  icon: Image.asset(
-                    'assets/images/google_logo.png', // Ensure you have the Google logo in your assets
-                    height: 24.0,
-                    width: 24.0,
-                  ),
-                  label: Text(
-                    'Sign in with Google\n(Use your Amherst College email address)',
-                    textAlign: TextAlign.center,
-                  ),
-                  onPressed: _signInWithGoogle,
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    backgroundColor: Colors.white,
-                    minimumSize: Size(250, 50),
-                    padding: EdgeInsets.all(10.0),
-                    textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100.0),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Platform.isIOS ?
-                ElevatedButton.icon(
-                  icon: Icon(Icons.apple, size: 24.0),
-                  label: Text(
-                    'Sign in with Apple\n(Use your Amherst College email address)',
-                    textAlign: TextAlign.center,
-                  ),
-                  onPressed: _signInWithApple,
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.black,
-                    minimumSize: Size(250, 50),
-                    padding: EdgeInsets.all(10.0),
-                    textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100.0),
-                    ),
-                  ),
-                )
-                : Container(),
-              ],
+        appBar: AppBar(title: const Text("Sign In")),
+        body: Stack(
+          children: [
+            CachedNetworkImage(
+              imageUrl: iconURL,
+              errorWidget: (context, url, error) => Icon(Icons.error),
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+              alignment: FractionalOffset(_animation.value, 0),
             ),
-          ),
-        ],
-      )
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 300, horizontal: 40),
+              child: _isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView(
+                      children: [
+                        ElevatedButton.icon(
+                          icon: Image.asset(
+                            'assets/images/google_logo.png', // Ensure you have the Google logo in your assets
+                            height: 24.0,
+                            width: 24.0,
+                          ),
+                          label: Text(
+                            'Sign in with Google\n(Use your Amherst College email address)',
+                            textAlign: TextAlign.center,
+                          ),
+                          onPressed: _signInWithGoogle,
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.black,
+                            backgroundColor: Colors.white,
+                            minimumSize: Size(250, 50),
+                            padding: EdgeInsets.all(10.0),
+                            textStyle: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100.0),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+            ),
+          ],
+        )
     );
   }
 }
