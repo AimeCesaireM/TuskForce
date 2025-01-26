@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'Home/home_screen.dart';
-import 'SignUp/sign_in_screen.dart';
-import 'bottom_nav_bar_frame.dart';
+import 'SignIn/sign_in_screen.dart';
+import 'frame.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -104,11 +104,15 @@ class MyApp extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   foregroundColor: Colors.deepPurple,
                   elevation: 4.0,
-                  centerTitle: true,
+                  centerTitle: false,
                   titleTextStyle: TextStyle(
-                    fontSize: 20.0,
+                    fontSize: 25.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
+                  ),
+                  iconTheme: IconThemeData(
+                    color: Colors.black,
+                    size: 20,
                   ),
                 ),
                 elevatedButtonTheme: ElevatedButtonThemeData(
@@ -121,7 +125,7 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
               ),
-              home: user == null ? SignInScreen() : BottomNavBarFrame(),
+              home: user == null ? SignInScreen() : Frame(),
             );
           },
         );

@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:tusk_force/Home/home_screen.dart';
+import 'package:tusk_force/MyStuff/my_stuff_screen.dart';
+import 'package:tusk_force/Profile/profile_screen.dart';
 
-class BottomNavBarFrame extends StatefulWidget {
+import 'Discover/discover_screen.dart';
+import 'Post/post_screen.dart';
+
+class Frame extends StatefulWidget {
+  Frame({super.key});
+
   @override
-  _BottomNavBarFrameState createState() => _BottomNavBarFrameState();
+  _FrameState createState() => _FrameState();
 }
 
-class _BottomNavBarFrameState extends State<BottomNavBarFrame> {
+class _FrameState extends State<Frame> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    Text('Discover Screen'),
-    Text('Post Screen'),
-    Text('My Stuff Screen'),
-    Text('Profile Screen'),
+  static final List<Widget> _navbarDestinations = <Widget>[
+    const HomeScreen(),
+    const DiscoverScreen(),
+    const PostScreen(),
+    const MyStuffScreen(),
+    ProfileScreen(),
+  ];
+
+  static final List<AppBar?> _navbarAppBars = <AppBar?>[
+    AppBar(title: Text('Home')),
+    null,
+    AppBar(title: Text('Post')),
+    AppBar(title: Text('My Stuff')),
+    AppBar(title: Text('Profile')),
   ];
 
   void _onItemTapped(int index) {
@@ -26,8 +41,9 @@ class _BottomNavBarFrameState extends State<BottomNavBarFrame> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _navbarAppBars[_selectedIndex],
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: _navbarDestinations[_selectedIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

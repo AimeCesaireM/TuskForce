@@ -49,6 +49,7 @@ dependencies:
   google_fonts: ^6.2.1
   google_sign_in: ^5.0.7
   sign_in_with_apple: ^6.1.4
+  flutter_markdown: ^0.6.10
 
 
 
@@ -84,3 +85,4 @@ flutter:
     - assets/images/tuskforce-icon-cool.png
     - assets/images/tuskforce-hero-amherst.png
     - assets/images/google_logo.png
+    - assets/docs/privacy_policy.md

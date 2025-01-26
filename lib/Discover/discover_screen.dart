@@ -1,15 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tusk_force/frame.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class DiscoverScreen extends StatefulWidget {
+  const DiscoverScreen({super.key});
+
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<DiscoverScreen> createState() => _DiscoverScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _DiscoverScreenState extends State<DiscoverScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override

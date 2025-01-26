@@ -123,8 +123,7 @@ class _SignInScreenState extends State<SignInScreen>
                   : ListView(
                       children: [
                         ElevatedButton.icon(
-                          icon: Image.asset(
-                            'assets/images/google_logo.png', // Ensure you have the Google logo in your assets
+                          icon: Image.asset('assets/images/google_logo.png', // Ensure you have the Google logo in your assets
                             height: 24.0,
                             width: 24.0,
                           ),
