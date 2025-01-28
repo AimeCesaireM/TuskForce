@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
 
-
   @override
   State<DiscoverScreen> createState() => _DiscoverScreenState();
 }
@@ -15,12 +14,12 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-        children: [
-          Text(_auth.currentUser!.email!),
-          Text(_auth.currentUser!.displayName!),
-          Text(_auth.currentUser!.photoURL!),
-          Text(_auth.currentUser!.uid),
-        ],
-      );
+          children: [
+            Text(_auth.currentUser!.email!),
+            Text(_auth.currentUser!.displayName!),
+            Text(_auth.currentUser!.photoURL!),
+            Text(_auth.currentUser!.uid),
+          ],
+        );
   }
 }

@@ -93,20 +93,12 @@ class MyApp extends StatelessWidget {
               title: 'TuskForce',
               theme: ThemeData(
                 textTheme: GoogleFonts.robotoTextTheme(),
-                scaffoldBackgroundColor: Colors.orange.shade100,
-                primarySwatch: Colors.blue,
-                colorScheme: ColorScheme.fromSwatch(
-                  primarySwatch: Colors.blue,
-                ).copyWith(
-                  secondary: Colors.amber,
-                ),
+                colorSchemeSeed: Colors.deepPurple,
                 appBarTheme: AppBarTheme(
-                  backgroundColor: Colors.transparent,
-                  foregroundColor: Colors.deepPurple,
                   elevation: 4.0,
-                  centerTitle: false,
+                  centerTitle: true,
                   titleTextStyle: TextStyle(
-                    fontSize: 25.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
@@ -117,6 +109,9 @@ class MyApp extends StatelessWidget {
                 ),
                 elevatedButtonTheme: ElevatedButtonThemeData(
                   style: ElevatedButton.styleFrom(
+                    textStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                     backgroundColor: Colors.blue,
                     foregroundColor: Colors.white,
                     shape: ContinuousRectangleBorder(

@@ -8,15 +8,15 @@ Welcome to TuskForce, a college freelancer app developed by Aime Cesaire Mugisha
 
 ### **Information We Collect**
 
-- Personal Information: We collect your name, college email address, phone number, and any other information strictly necessary for exchanging information on the platform. Your name and college email address are made public to all the other users of TuskForce on your campus. You may choose to share more information, such as your phone number, social media handles, and any other info you share privately to members met on TuskForce.
+- **Personal Information**: We collect your name, college email address, phone number, and any other information strictly necessary for exchanging information on the platform. Your name and college email address are made public to all the other users of TuskForce on your campus. You may choose to share more information, such as your phone number, social media handles, and any other info you share privately to members met on TuskForce.
 
-- Device Information: We use Firebase for storage of user account data, which may collect device information in the background, such as log information and cookies. For more details, please refer to the Firebase Privacy Policy.
+- **Device Information**: We use Firebase for storage of user account data, which may collect device information in the background, such as log information and cookies. For more details, please refer to the Firebase Privacy Policy.
 
-- Google Sign-In: We use Google for sign-in, which may collect additional information. For more details, please refer to the Google Privacy Policy.
+- **Google Sign-In**: We use Google for sign-in, which may collect additional information. For more details, please refer to the Google Privacy Policy.
 
-- Usage Data: We collect information about how you interact with the app, which helps us improve our services.
+- **Usage Data**: We collect information about how you interact with the app, which helps us improve our services.
 
-- Location Data: If applicable, we may collect location data to enhance the user experience.
+- **Location Data**: If applicable, we may collect location data to enhance the user experience.
 
 ### **Use of Information**
 

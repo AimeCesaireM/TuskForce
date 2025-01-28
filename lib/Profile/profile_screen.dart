@@ -12,7 +12,7 @@ import 'Reviews/reviews_screen.dart';
 import 'TermsOfService/terms_of_service_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({super.key});
+  const ProfileScreen({super.key});
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -20,31 +20,75 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final List<Map<String, dynamic>> items = [
-    {'title': 'Account', 'icon': Icons.person_outline_rounded, 'destination': AccountScreen()},
-    {'title': 'Requests', 'icon': Icons.assignment_outlined, 'destination': RequestsScreen()},
-    {'title': 'Offers', 'icon': Icons.work_outline_outlined, 'destination': OffersScreen()},
-    {'title': 'Reviews', 'icon': Icons.star_border_outlined, 'destination': ReviewsScreen()},
-    {'title': 'Favorites', 'icon': Icons.favorite_border_rounded, 'destination': FavoritesScreen()},
-    {'title': 'Notifications', 'icon': Icons.notifications_none_rounded, 'destination': NotificationsScreen()},
-    {'title': 'Privacy Policy', 'icon': Icons.privacy_tip_outlined, 'destination': PrivacyPolicyScreen()},
-    {'title': 'Terms of Service', 'icon': Icons.description_outlined, 'destination': TermsOfServiceScreen()},
-    {'title': 'Community Guidelines', 'icon': Icons.groups_outlined, 'destination': CommunityGuidelinesScreen()},
-    {'title': 'FAQ', 'icon': Icons.help_outline_rounded, 'destination': FAQScreen()},
-    {'title': 'Report a Bug', 'icon': Icons.bug_report_outlined, 'destination': ReportABugScreen()}
+    {
+      'title': 'Account',
+      'icon': Icons.person_outline_rounded,
+      'destination': AccountScreen()
+    },
+    {
+      'title': 'Requests',
+      'icon': Icons.assignment_outlined,
+      'destination': RequestsScreen()
+    },
+    {
+      'title': 'Offers',
+      'icon': Icons.work_outline_outlined,
+      'destination': OffersScreen()
+    },
+    {
+      'title': 'Reviews',
+      'icon': Icons.star_border_outlined,
+      'destination': ReviewsScreen()
+    },
+    {
+      'title': 'Lists',
+      'icon': Icons.favorite_border_rounded,
+      'destination': FavoritesScreen()
+    },
+    {
+      'title': 'Notifications',
+      'icon': Icons.notifications_none_rounded,
+      'destination': NotificationsScreen()
+    },
+    {
+      'title': 'Privacy Policy',
+      'icon': Icons.privacy_tip_outlined,
+      'destination': PrivacyPolicyScreen()
+    },
+    {
+      'title': 'Terms of Service',
+      'icon': Icons.description_outlined,
+      'destination': TermsOfServiceScreen()
+    },
+    {
+      'title': 'Community Guidelines',
+      'icon': Icons.groups_outlined,
+      'destination': CommunityGuidelinesScreen()
+    },
+    {
+      'title': 'FAQ',
+      'icon': Icons.help_outline_rounded,
+      'destination': FAQScreen()
+    },
+    {
+      'title': 'Report a Bug',
+      'icon': Icons.bug_report_outlined,
+      'destination': ReportABugScreen()
+    }
   ];
 
   void _navigateToDestination(int index) {
-    if (items[index]['destination'] != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => items[index]['destination']),
-      );
-    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => items[index]['destination'],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return
+    return Stack(children: [
       ListView.builder(
         itemCount: items.length,
         scrollDirection: Axis.vertical,
@@ -55,17 +99,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
               borderRadius: BorderRadius.circular(0),
             ),
             child: ListTile(
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: EdgeInsets.all(8),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(0),
               ),
               leading: Icon(items[index]['icon']),
-              title: Text(items[index]['title']),
+              title: Text(
+                items[index]['title'],
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               trailing: Icon(Icons.arrow_forward_ios_rounded, size: 15),
               onTap: () => _navigateToDestination(index),
             ),
           );
         },
-    );
+      ),
+    ]);
   }
 }

@@ -10,10 +10,6 @@ class PostScreen extends StatefulWidget {
 class _PostScreenState extends State<PostScreen> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-        children: [
-          Text('Post Screen Test'),
-        ],
-      );
+    return Text('Post Screen');
   }
 }

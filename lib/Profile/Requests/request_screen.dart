@@ -7,10 +7,10 @@ class RequestsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Requests'),
+        title: Text('Requests'),
       ),
       body: Center(
-        child: Text('My Requests Screen'),
+        child: Text('Requests Screen'),
       ),
     );
   }

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'dart:io' show Platform;
 
 import '../Services/global_variables.dart';
 
