@@ -115,38 +115,39 @@ class _SignInScreenState extends State<SignInScreen>
               alignment: FractionalOffset(_animation.value, 0),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 300, horizontal: 40),
+              padding: EdgeInsets.symmetric(vertical: 300, horizontal: 0),
               child: _isLoading
                   ? Center(child: CircularProgressIndicator())
                   : ListView(
                       children: [
-                        ElevatedButton.icon(
-                          icon: Image.asset('assets/images/google_logo.png', // Ensure you have the Google logo in your assets
-                            height: 24.0,
-                            width: 24.0,
-                          ),
-                          label: Text(
-                            'Sign in with Google\n(Use your Amherst College email address)',
-                            textAlign: TextAlign.center,
-                          ),
-                          onPressed: _signInWithGoogle,
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.black,
-                            backgroundColor: Colors.white,
-                            minimumSize: Size(250, 50),
-                            padding: EdgeInsets.all(10.0),
-                            textStyle: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100.0),
+                        Center(
+                          child: ElevatedButton.icon(
+                            icon: Image.asset(
+                              'assets/images/google_logo.png', // Ensure you have the Google logo in your assets
+                              height: 30.0,
+                              width: 30.0,
+                            ),
+                            label: Text(
+                              'Sign in with Google into your college email',
+                              textAlign: TextAlign.center,
+                            ),
+                            onPressed: _signInWithGoogle,
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(250, 50),
+                              padding: EdgeInsets.all(20.0),
+                              backgroundColor: Colors.white,
+                              textStyle: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                              shape: RoundedRectangleBorder(
+                                  // borderRadius: BorderRadius.circular(100.0),
+                                  ),
                             ),
                           ),
-                        ),
+                        )
                       ],
                     ),
             ),
           ],
-        )
-    );
+        ));
   }
 }

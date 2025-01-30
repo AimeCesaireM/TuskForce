@@ -26,9 +26,10 @@ class AccountScreen extends StatelessWidget {
         title: Text('Account'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
+            SizedBox(height: 20),
             Center(
               child: Stack(
                 children: [
@@ -106,6 +107,8 @@ class AccountScreen extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 20),
+            Divider(),
             SizedBox(height: 20),
             OutlinedButton(
               onPressed: _logout,

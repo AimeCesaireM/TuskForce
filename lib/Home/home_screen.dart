@@ -13,13 +13,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  ListView(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: ListView(
         children: [
           Text(_auth.currentUser!.email!),
           Text(_auth.currentUser!.displayName!),
           Text(_auth.currentUser!.photoURL!),
           Text(_auth.currentUser!.uid),
         ],
-      );
+      ),
+    );
   }
 }

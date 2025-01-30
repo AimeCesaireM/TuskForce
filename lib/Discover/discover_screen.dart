@@ -8,18 +8,57 @@ class DiscoverScreen extends StatefulWidget {
   State<DiscoverScreen> createState() => _DiscoverScreenState();
 }
 
-class _DiscoverScreenState extends State<DiscoverScreen> {
+class _DiscoverScreenState extends State<DiscoverScreen> with SingleTickerProviderStateMixin {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-          children: [
-            Text(_auth.currentUser!.email!),
-            Text(_auth.currentUser!.displayName!),
-            Text(_auth.currentUser!.photoURL!),
-            Text(_auth.currentUser!.uid),
+    return Scaffold(
+      appBar: AppBar(
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: 'Search...',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(100.0),
+                borderSide: BorderSide.none,
+              ),
+              filled: true,
+              fillColor: Colors.white,
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16.0),
+              prefixIcon: Icon(Icons.search),
+            ),
+          ),
+        ),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: [
+            Tab(text: 'Products'),
+            Tab(text: 'Services'),
           ],
-        );
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          Center(child: Text('Products Page')),
+          Center(child: Text('Services Page')),
+        ],
+      ),
+    );
   }
 }

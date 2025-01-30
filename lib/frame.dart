@@ -15,22 +15,6 @@ class Frame extends StatefulWidget {
 
 class _FrameState extends State<Frame> {
   int _selectedIndex = 0;
-  static final List<AppBar?> _appBars = <AppBar?> [
-    AppBar(
-      title: Text('Home'),
-    ),
-    AppBar(
-      title: Text('Discover'),
-        ),
-    AppBar(
-      title: Text('Post'),
-    ),
-    null
-    ,
-    AppBar(
-      title: Text('Profile'),
-    ),
-  ];
 
   static final List<Widget> _navbarDestinations = <Widget>[
     const HomeScreen(),
@@ -49,7 +33,6 @@ class _FrameState extends State<Frame> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBars[_selectedIndex],
       body: IndexedStack(
         index: _selectedIndex,
         children: _navbarDestinations,

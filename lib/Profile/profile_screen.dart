@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Account/account_screen.dart';
 import 'CommunityGuidelines/community_guidelines_screen.dart';
-import 'FAQ/faq_screen.dart';
-import 'Favorites/favorites_screen.dart';
 import 'Notifications/notifications_screen.dart';
 import 'Offers/offers_screen.dart';
 import 'PrivacyPolicy/privacy_policy_screen.dart';
@@ -26,12 +24,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       'destination': AccountScreen()
     },
     {
-      'title': 'Requests',
+      'title': 'Request History',
       'icon': Icons.assignment_outlined,
       'destination': RequestsScreen()
     },
     {
-      'title': 'Offers',
+      'title': 'Offer History',
       'icon': Icons.work_outline_outlined,
       'destination': OffersScreen()
     },
@@ -39,11 +37,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       'title': 'Reviews',
       'icon': Icons.star_border_outlined,
       'destination': ReviewsScreen()
-    },
-    {
-      'title': 'Lists',
-      'icon': Icons.favorite_border_rounded,
-      'destination': FavoritesScreen()
     },
     {
       'title': 'Notifications',
@@ -66,11 +59,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       'destination': CommunityGuidelinesScreen()
     },
     {
-      'title': 'FAQ',
-      'icon': Icons.help_outline_rounded,
-      'destination': FAQScreen()
-    },
-    {
       'title': 'Report a Bug',
       'icon': Icons.bug_report_outlined,
       'destination': ReportABugScreen()
@@ -88,32 +76,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      ListView.builder(
-        itemCount: items.length,
-        scrollDirection: Axis.vertical,
-        itemBuilder: (context, index) {
-          return Card(
-            margin: EdgeInsets.all(0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(0),
-            ),
-            child: ListTile(
-              contentPadding: EdgeInsets.all(8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0),
-              ),
-              leading: Icon(items[index]['icon']),
-              title: Text(
-                items[index]['title'],
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              trailing: Icon(Icons.arrow_forward_ios_rounded, size: 15),
-              onTap: () => _navigateToDestination(index),
-            ),
-          );
-        },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
       ),
-    ]);
+      body: Padding(padding: EdgeInsets.all(10.0),
+    child: Stack(children: [
+        ListView.builder(
+          itemCount: items.length,
+          scrollDirection: Axis.vertical,
+          itemBuilder: (context, index) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                  leading: Icon(items[index]['icon']),
+                  title: Text(
+                    items[index]['title'],
+                  ),
+                  trailing: Icon(Icons.arrow_forward_ios_rounded, size: 15),
+                  onTap: () => _navigateToDestination(index),
+                ),
+                Divider(),
+              ],
+            );
+          },
+        ),
+      ]),
+      )
+    );
   }
 }

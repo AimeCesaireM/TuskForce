@@ -27,14 +27,9 @@ class _MyStuffScreenState extends State<MyStuffScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'My Stuff',
-          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-        ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(48.0),
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(0.0),
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
@@ -42,7 +37,6 @@ class _MyStuffScreenState extends State<MyStuffScreen>
                   tabAlignment: TabAlignment.start,
                   controller: _tabController,
                   isScrollable: true,
-                  padding: EdgeInsets.all(0.0),
                   tabs: [
                     Tab(text: 'Messages'),
                     Tab(text: 'Requests'),

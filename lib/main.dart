@@ -112,10 +112,10 @@ class MyApp extends StatelessWidget {
                     textStyle: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
+                    // backgroundColor: Colors.blue,
+                    // foregroundColor: Colors.white,
                     shape: ContinuousRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
+                      borderRadius: BorderRadius.circular(0),
                     ),
                   ),
                 ),
