@@ -69,12 +69,11 @@ class ReportABugScreen extends StatelessWidget {
               child: OutlinedButton(
                 onPressed: _submitBugReport,
                 style: OutlinedButton.styleFrom(
-                  minimumSize: Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                    side: BorderSide(color: Colors.black),
-                  ),
-                ),
+                    minimumSize: Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.zero,
+                    ),
+                    side: BorderSide(color: Colors.black)),
                 child: Text('Submit Bug Report'),
               ),
             ),

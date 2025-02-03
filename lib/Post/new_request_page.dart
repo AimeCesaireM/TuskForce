@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Global/global_vars.dart';
+
 class NewRequestPage extends StatefulWidget {
   const NewRequestPage({super.key});
 
@@ -9,23 +11,7 @@ class NewRequestPage extends StatefulWidget {
 
 class _NewRequestPageState extends State<NewRequestPage> {
   bool isService = true;
-  String selectedCategory = 'Beauty';
-  final List<String> categories = [
-    'Beauty',
-    'Clothing',
-    'Rideshare',
-    'Electronics',
-    'Home Goods',
-    'Books',
-    'Toys',
-    'Outdoors',
-    'Tutoring',
-    'Entertainment',
-    'Design',
-    'Content Creation',
-    'Event Services',
-    'Other'
-  ];
+  String selectedCategory = categories[0];
 
   @override
   Widget build(BuildContext context) {

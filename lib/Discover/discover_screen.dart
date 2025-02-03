@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tusk_force/Discover/products_page.dart';
+import 'package:tusk_force/Discover/services_page.dart';
+import 'package:tusk_force/Global/global_vars.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
@@ -8,15 +11,11 @@ class DiscoverScreen extends StatefulWidget {
   State<DiscoverScreen> createState() => _DiscoverScreenState();
 }
 
-class _DiscoverScreenState extends State<DiscoverScreen> with SingleTickerProviderStateMixin {
+class _DiscoverScreenState extends State<DiscoverScreen>
+    with SingleTickerProviderStateMixin {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late TabController _tabController;
-  String selectedCategory = 'All';
-  final List<String> categories = [
-    'All', 'Beauty', 'Clothing', 'Rideshare', 'Electronics', 'Home Goods', 'Books',
-    'Toys', 'Outdoors', 'Tutoring', 'Entertainment', 'Design', 'Content Creation',
-    'Event Services', 'Other'
-  ];
+  String selectedCategory = categories[0];
 
   @override
   void initState() {
@@ -48,7 +47,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> with SingleTickerProvid
                     ),
                     filled: true,
                     fillColor: Colors.white,
-                    contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16.0),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
                     prefixIcon: Icon(Icons.search),
                   ),
                 ),
@@ -59,7 +59,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> with SingleTickerProvid
               items: categories.map((String category) {
                 return DropdownMenuItem<String>(
                   value: category,
-                  child: Text(category,
+                  child: Text(
+                    category,
                     style: TextStyle(
                       color: Colors.grey.shade900,
                     ),
@@ -72,8 +73,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with SingleTickerProvid
                 });
               },
               underline: Container(),
-              icon: Icon(Icons.filter_list_outlined, color: Colors.black),
-              style: TextStyle(color: Colors.white),
+              icon: Icon(Icons.tune_outlined, color: Colors.black),
             ),
           ],
         ),
@@ -88,8 +88,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> with SingleTickerProvid
       body: TabBarView(
         controller: _tabController,
         children: [
-          Center(child: Text('Products Page')),
-          Center(child: Text('Services Page')),
+          ProductsPage(),
+          ServicesPage(),
         ],
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Global/global_vars.dart';
+
 class NewOfferPage extends StatefulWidget {
   const NewOfferPage({super.key});
 
@@ -10,12 +12,7 @@ class NewOfferPage extends StatefulWidget {
 class _NewOfferPageState extends State<NewOfferPage> {
   bool isService = true;
   bool isProduct = false;
-  String selectedCategory = 'Beauty';
-  final List<String> categories = [
-    'Beauty', 'Clothing', 'Rideshare', 'Electronics', 'Home Goods', 'Books',
-    'Toys', 'Outdoors', 'Tutoring', 'Entertainment', 'Design', 'Content Creation',
-    'Event Services', 'Other'
-  ];
+  String selectedCategory = categories[0];
 
   void _uploadImage() {
     // Handle image upload
@@ -78,7 +75,9 @@ class _NewOfferPageState extends State<NewOfferPage> {
                 });
               },
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             TextField(
               maxLines: 5,
               decoration: InputDecoration(
@@ -98,17 +97,12 @@ class _NewOfferPageState extends State<NewOfferPage> {
               ),
               keyboardType: TextInputType.number,
             ),
-            if (isProduct)
-              Column(
-                children: [
-                  SizedBox(height: 20),
-                  OutlinedButton.icon(
-                    onPressed: _uploadImage,
-                    icon: Icon(Icons.upload_outlined),
-                    label: Text('Upload Picture'),
-                  ),
-                ],
-              ),
+            SizedBox(height: 20),
+            OutlinedButton.icon(
+              onPressed: _uploadImage,
+              icon: Icon(Icons.upload_outlined),
+              label: Text('Upload Picture'),
+            ),
             SizedBox(height: 50),
             Center(
               child: OutlinedButton(

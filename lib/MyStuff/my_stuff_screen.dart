@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tusk_force/MyStuff/Messages/messages_page.dart';
+import 'package:tusk_force/MyStuff/Requests/requests_page.dart';
+import 'package:tusk_force/MyStuff/Saved/saved_page.dart';
+
+import 'Offers/offers_page.dart';
 
 class MyStuffScreen extends StatefulWidget {
   const MyStuffScreen({super.key});
@@ -28,7 +33,7 @@ class _MyStuffScreenState extends State<MyStuffScreen>
     return Scaffold(
       appBar: AppBar(
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(48.0),
+          preferredSize: Size.fromHeight(0.0),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -41,7 +46,7 @@ class _MyStuffScreenState extends State<MyStuffScreen>
                     Tab(text: 'Messages'),
                     Tab(text: 'Requests'),
                     Tab(text: 'Offers'),
-                    Tab(text: 'Lists'),
+                    Tab(text: 'Saved'),
                   ],
                 ),
               ],
@@ -52,10 +57,10 @@ class _MyStuffScreenState extends State<MyStuffScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
-          Center(child: Text('Messages Page')),
-          Center(child: Text('My Requests Page')),
-          Center(child: Text('My Offers Page')),
-          Center(child: Text('My Lists Page')),
+          MessagesPage(),
+          RequestsPage(),
+          OffersPage(),
+          SavedPage(),
         ],
       ),
     );

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'Account/account_screen.dart';
 import 'CommunityGuidelines/community_guidelines_screen.dart';
 import 'Notifications/notifications_screen.dart';
-import 'Offers/offers_screen.dart';
+import 'OfferHistory//offers_history_screen.dart';
 import 'PrivacyPolicy/privacy_policy_screen.dart';
 import 'ReportABug/report_a_bug_screen.dart';
-import 'Requests/request_screen.dart';
+import 'RequestHistory/request_history_screen.dart';
 import 'Reviews/reviews_screen.dart';
 import 'TermsOfService/terms_of_service_screen.dart';
 
@@ -26,12 +27,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     {
       'title': 'Request History',
       'icon': Icons.assignment_outlined,
-      'destination': RequestsScreen()
+      'destination': RequestHistoryScreen()
     },
     {
       'title': 'Offer History',
       'icon': Icons.work_outline_outlined,
-      'destination': OffersScreen()
+      'destination': OfferHistory()
     },
     {
       'title': 'Reviews',
@@ -77,36 +78,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
-      body: Padding(padding: EdgeInsets.all(10.0),
-    child: Stack(children: [
-        ListView.builder(
-          itemCount: items.length,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                  ),
-                  leading: Icon(items[index]['icon']),
-                  title: Text(
-                    items[index]['title'],
-                  ),
-                  trailing: Icon(Icons.arrow_forward_ios_rounded, size: 15),
-                  onTap: () => _navigateToDestination(index),
-                ),
-                Divider(),
-              ],
-            );
-          },
+        appBar: AppBar(
+          title: Text('Profile'),
         ),
-      ]),
-      )
-    );
+        body: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Stack(children: [
+            ListView.builder(
+              itemCount: items.length,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.zero,
+                      ),
+                      leading: Icon(items[index]['icon']),
+                      title: Text(
+                        items[index]['title'],
+                      ),
+                      trailing: Icon(Icons.arrow_forward_ios_rounded, size: 15),
+                      onTap: () => _navigateToDestination(index),
+                    ),
+                    Divider(),
+                  ],
+                );
+              },
+            ),
+          ]),
+        ));
   }
 }

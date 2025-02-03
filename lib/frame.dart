@@ -15,11 +15,11 @@ class Frame extends StatefulWidget {
 
 class _FrameState extends State<Frame> {
   int _selectedIndex = 0;
+  PostScreen postScreen = PostScreen();
 
   static final List<Widget> _navbarDestinations = <Widget>[
     const HomeScreen(),
     const DiscoverScreen(),
-    const PostScreen(),
     const MyStuffScreen(),
     ProfileScreen(),
   ];
@@ -30,6 +30,28 @@ class _FrameState extends State<Frame> {
     });
   }
 
+  void _onPostButtonTapped() {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => postScreen,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(0.0, 1.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +59,12 @@ class _FrameState extends State<Frame> {
         index: _selectedIndex,
         children: _navbarDestinations,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _onPostButtonTapped,
+        // backgroundColor: Colors.blue,
+        child: Icon(Icons.add_circle_outline_rounded, size: 40),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -46,10 +74,6 @@ class _FrameState extends State<Frame> {
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Discover',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle, size: 40),
-            label: 'Post',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.list),

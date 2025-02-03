@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tusk_force/Profile/Reviews/about_me_page.dart';
+import 'package:tusk_force/Profile/Reviews/by_me_page.dart';
 
 class ReviewsScreen extends StatefulWidget {
   const ReviewsScreen({super.key});
@@ -7,7 +9,8 @@ class ReviewsScreen extends StatefulWidget {
   State<ReviewsScreen> createState() => _ReviewsScreenState();
 }
 
-class _ReviewsScreenState extends State<ReviewsScreen> with SingleTickerProviderStateMixin {
+class _ReviewsScreenState extends State<ReviewsScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -38,8 +41,8 @@ class _ReviewsScreenState extends State<ReviewsScreen> with SingleTickerProvider
       body: TabBarView(
         controller: _tabController,
         children: [
-          Center(child: Text('Reviews By Me')),
-          Center(child: Text('Reviews About Me')),
+          ByMePage(),
+          AboutMePage(),
         ],
       ),
     );

@@ -1,16 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class RequestsPage extends StatefulWidget {
+  const RequestsPage({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<RequestsPage> createState() => _RequestsPageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  bool isListView = true;
+class _RequestsPageState extends State<RequestsPage> {
+  final List<String> selectedCategories = [];
   final ScrollController _scrollController = ScrollController();
   List<int> items = List.generate(20, (index) => index); // Initial items
   bool _showScrollToTopButton = false;
@@ -43,12 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _toggleView() {
-    setState(() {
-      isListView = !isListView;
-    });
-  }
-
   void _scrollToTop() {
     _scrollController.animateTo(
       0.0,
@@ -60,18 +52,24 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        actions: [
-          IconButton(
-            icon: Icon(isListView ? Icons.grid_view : Icons.list),
-            onPressed: _toggleView,
-          ),
-        ],
-      ),
       body: Stack(
         children: [
-          isListView ? _buildListView() : _buildGridView(),
+          Column(
+            children: [
+              SizedBox(height: 10),
+              Expanded(
+                child: ListView.builder(
+                  controller: _scrollController,
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text('Item ${items[index]}'),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
           if (_showScrollToTopButton)
             Positioned(
               right: 16,
@@ -85,35 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
         ],
       ),
-    );
-  }
-
-  Widget _buildListView() {
-    return ListView.builder(
-      controller: _scrollController,
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text('Item ${items[index]}'),
-        );
-      },
-    );
-  }
-
-  Widget _buildGridView() {
-    return GridView.builder(
-      controller: _scrollController,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-      ),
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return Card(
-          child: Center(
-            child: Text('Item ${items[index]}'),
-          ),
-        );
-      },
     );
   }
 }

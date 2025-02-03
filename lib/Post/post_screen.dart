@@ -16,11 +16,22 @@ class _PostScreenState extends State<PostScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          bottom: TabBar(
-            tabs: [
-              Tab(text: 'New Request'),
-              Tab(text: 'New Offer'),
-            ],
+          leading: IconButton(
+              onPressed: Navigator.of(context).canPop()
+                  ? Navigator.of(context).pop
+                  : null,
+              icon: Icon(
+                Icons.close_outlined,
+                color: Colors.black,
+              )),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(20.0),
+            child: TabBar(
+              tabs: [
+                Tab(text: 'New Request'),
+                Tab(text: 'New Offer'),
+              ],
+            ),
           ),
         ),
         body: TabBarView(
