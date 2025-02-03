@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tusk_force/Post/new_offer_page.dart';
+import 'package:tusk_force/Post/new_request_page.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({super.key});
@@ -23,8 +25,8 @@ class _PostScreenState extends State<PostScreen> {
         ),
         body: TabBarView(
           children: [
-            Center(child: Text('New Request')),
-            Center(child: Text('New Offer')),
+            NewRequestPage(),
+            NewOfferPage(),
           ],
         ),
       ),

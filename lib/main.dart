@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -92,6 +91,7 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'TuskForce',
               theme: ThemeData(
+                useMaterial3: true,
                 textTheme: GoogleFonts.robotoTextTheme(),
                 colorSchemeSeed: Colors.deepPurple,
                 appBarTheme: AppBarTheme(
@@ -109,6 +109,7 @@ class MyApp extends StatelessWidget {
                 ),
                 elevatedButtonTheme: ElevatedButtonThemeData(
                   style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.infinity, 50),
                     textStyle: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
@@ -120,7 +121,7 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
               ),
-              home: user == null ? SignInScreen() : Frame(),
+              home: Frame() //user == null ? SignInScreen() : Frame(),
             );
           },
         );

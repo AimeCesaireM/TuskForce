@@ -19,10 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView(
         children: [
-          Text(_auth.currentUser!.email!),
-          Text(_auth.currentUser!.displayName!),
-          Text(_auth.currentUser!.photoURL!),
-          Text(_auth.currentUser!.uid),
         ],
       ),
     );

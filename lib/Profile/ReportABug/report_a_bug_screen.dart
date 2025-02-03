@@ -25,7 +25,7 @@ class ReportABugScreen extends StatelessWidget {
           children: [
             SizedBox(height: 20),
             Text(
-              'Describe the bug:',
+              'Description:',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
@@ -40,7 +40,7 @@ class ReportABugScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Reproduce the bug:',
+              'Reproduction:',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 8),
@@ -62,13 +62,13 @@ class ReportABugScreen extends StatelessWidget {
             OutlinedButton.icon(
               onPressed: _uploadScreenshot,
               icon: Icon(Icons.upload_outlined),
-              label: Text('Upload Screenshot'),
+              label: Text('Upload'),
             ),
             SizedBox(height: 40),
             Center(
               child: OutlinedButton(
                 onPressed: _submitBugReport,
-                style: ElevatedButton.styleFrom(
+                style: OutlinedButton.styleFrom(
                   minimumSize: Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero,
