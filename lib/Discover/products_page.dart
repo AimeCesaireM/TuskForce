@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tusk_force/Global/global_vars.dart';
+import 'package:tusk_force/Home/tusk_widget.dart';
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
@@ -103,10 +104,20 @@ class _ProductsPageState extends State<ProductsPage> {
                   ),
                   itemCount: items.length,
                   itemBuilder: (context, index) {
-                    return Card(
-                      child: Center(
-                        child: Text('Item ${items[index]}'),
-                      ),
+                    return TuskWidget(
+                      tuskTitle: 'Title',
+                      tuskDescription: 'Description',
+                      tuskPrice: 'Price',
+                      tuskID: 'ID',
+                      tuskCategory: 'Category',
+                      uploaderEmail: 'uploaderEmail',
+                      uploaderName: 'uploaderName',
+                      uploaderID: 'uploaderID',
+                      tuskImage: 'tuskImage',
+                      uploaderProfilePhoto: 'uploaderProfilePhoto',
+                      isService: 'isService',
+                      tuskTags: [],
+                      isListView: false,
                     );
                   },
                 ),

@@ -1,8 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
+import '../Profile/PrivacyPolicy/privacy_policy_screen.dart';
+import '../Profile/TermsOfService/terms_of_service_screen.dart';
 import '../Services/global_variables.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -13,6 +16,7 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen>
     with TickerProviderStateMixin {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  User? user = FirebaseAuth.instance.currentUser;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   late Animation<double> _animation;
@@ -123,7 +127,7 @@ class _SignInScreenState extends State<SignInScreen>
                         Center(
                           child: ElevatedButton.icon(
                             icon: Image.asset(
-                              'assets/images/google_logo.png', // Ensure you have the Google logo in your assets
+                              'assets/images/google_logo.png',
                               height: 30.0,
                               width: 30.0,
                             ),
@@ -138,12 +142,56 @@ class _SignInScreenState extends State<SignInScreen>
                               backgroundColor: Colors.white,
                               textStyle: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
-                              shape: RoundedRectangleBorder(
-                                  // borderRadius: BorderRadius.circular(100.0),
-                                  ),
                             ),
                           ),
-                        )
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: TextStyle(
+                                color: Colors.deepOrange.shade300,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold),
+                            children: [
+                              TextSpan(text: 'By continuing you agree to our '),
+                              TextSpan(
+                                text: 'terms of service',
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              TermsOfServiceScreen()),
+                                    );
+                                  },
+                              ),
+                              TextSpan(text: ' and '),
+                              TextSpan(
+                                text: 'privacy policy',
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PrivacyPolicyScreen()),
+                                    );
+                                  },
+                              ),
+                              TextSpan(text: '.'),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
             ),

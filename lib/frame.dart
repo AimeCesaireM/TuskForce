@@ -21,7 +21,7 @@ class _FrameState extends State<Frame> {
     const HomeScreen(),
     const DiscoverScreen(),
     const MyStuffScreen(),
-    ProfileScreen(),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -61,6 +61,10 @@ class _FrameState extends State<Frame> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _onPostButtonTapped,
+        backgroundColor: Colors.deepPurple.shade200,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0),
+        ),
         // backgroundColor: Colors.blue,
         child: Icon(Icons.add_circle_outline_rounded, size: 40),
       ),

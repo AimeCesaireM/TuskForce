@@ -89,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ListTile(
                       shape: RoundedRectangleBorder(

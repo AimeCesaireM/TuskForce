@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tusk_force/Home/tusk_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -78,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
               top: MediaQuery.of(context).size.height / 2 -
                   28, // Adjust for FAB size
               child: FloatingActionButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                 onPressed: _scrollToTop,
                 backgroundColor: Colors.white,
                 child: Icon(Icons.arrow_upward),
@@ -93,9 +95,20 @@ class _HomeScreenState extends State<HomeScreen> {
       controller: _scrollController,
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text('Item ${items[index]}'),
-        );
+        return TuskWidget(
+            tuskTitle: 'Title',
+            tuskDescription: 'Description',
+            tuskPrice: 'Price',
+            tuskID: 'ID',
+            tuskCategory: 'Category',
+            uploaderEmail: 'uploaderEmail',
+            uploaderName: 'uploaderName',
+            uploaderID: 'uploaderID',
+            tuskImage: 'tuskImage',
+            uploaderProfilePhoto: 'uploaderProfilePhoto',
+            isService: 'isService',
+            tuskTags: [],
+            isListView: isListView);
       },
     );
   }
@@ -108,10 +121,20 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return Card(
-          child: Center(
-            child: Text('Item ${items[index]}'),
-          ),
+        return TuskWidget(
+          tuskTitle: 'Title',
+          tuskDescription: 'Description',
+          tuskPrice: 'Price',
+          tuskID: 'ID',
+          tuskCategory: 'Category',
+          uploaderEmail: 'uploaderEmail',
+          uploaderName: 'uploaderName',
+          uploaderID: 'uploaderID',
+          tuskImage: 'tuskImage',
+          uploaderProfilePhoto: 'uploaderProfilePhoto',
+          isService: 'isService',
+          tuskTags: [],
+          isListView: isListView,
         );
       },
     );
