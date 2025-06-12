@@ -22,11 +22,11 @@ TuskForce is designed for versatility:
 
 ## 🎯 Features
 
-✅ Google OAuth2 login via Firebase Auth
-✅ NoSQL database management via Firebase Firestore
-✅ Cached network images for reduced load times and smooth UI performance
-✅ Modular, maintainable file structure
-✅ Custom components like `TuskWidget` for task tracking
+✅ Google OAuth2 login via Firebase Auth  
+✅ NoSQL database management via Firebase Firestore  
+✅ Cached network images for reduced load times and smooth UI performance  
+✅ Modular, maintainable file structure  
+✅ Custom components like `TuskWidget` for task tracking  
 ✅ Consistent design system with reusable frames and responsive layouts
 
 ---
@@ -49,10 +49,10 @@ TuskForce is designed for versatility:
 
 ## 🔐 Authentication & Storage
 
-TuskForce uses Firebase’s authentication framework to provide seamless **Google Sign-In via OAuth2
-**, ensuring fast and secure onboarding for users. Once authenticated, user-specific data—such as
-personal tasks, bookmarks, or service preferences—is stored and retrieved from **Firebase Firestore
-**, a scalable NoSQL cloud database.
+TuskForce uses Firebase’s authentication framework to provide seamless **Google Sign-In via OAuth2**,   
+ensuring fast and secure onboarding for users. Once authenticated, user-specific data—such as
+personal tasks,  
+ bookmarks, or service preferences—is stored and retrieved from **Firebase Firestore**, a scalable NoSQL cloud database.
 
 This enables persistent state and personalized experiences across devices.
 
@@ -77,8 +77,8 @@ intuitive interactions.
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/AimeCesaireM/tuskforce_flutter_app.git
-cd tuskforce_flutter_app
+git clone https://github.com/AimeCesaireM/tusk_force.git
+cd tusk_force
 ```
 
 2. **Install dependencies**
