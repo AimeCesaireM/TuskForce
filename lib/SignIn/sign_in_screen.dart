@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../Profile/PrivacyPolicy/privacy_policy_screen.dart';
 import '../Profile/TermsOfService/terms_of_service_screen.dart';
-import '../Services/global_variables.dart';
+// import '../Services/global_variables.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -104,20 +103,20 @@ class _SignInScreenState extends State<SignInScreen>
 
   @override
   Widget build(BuildContext context) {
-    String iconURL = loginWallpaperSummerFirebase;
+    // String iconURL = loginWallpaperSummerFirebase;
 
     return Scaffold(
         appBar: AppBar(title: const Text("Sign In")),
         body: Stack(
           children: [
-            CachedNetworkImage(
-              imageUrl: iconURL,
-              errorWidget: (context, url, error) => Icon(Icons.error),
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
-              alignment: FractionalOffset(_animation.value, 0),
-            ),
+            // CachedNetworkImage(
+            //   imageUrl: iconURL,
+            //   errorWidget: (context, url, error) => Icon(Icons.error),
+            //   width: double.infinity,
+            //   height: double.infinity,
+            //   fit: BoxFit.cover,
+            //   alignment: FractionalOffset(_animation.value, 0),
+            // ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 300, horizontal: 0),
               child: _isLoading
