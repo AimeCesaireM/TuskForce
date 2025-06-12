@@ -77,8 +77,8 @@ intuitive interactions.
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/AimeCesaireM/tusk_force.git
-cd tusk_force
+git clone https://github.com/AimeCesaireM/TuskForce.git
+cd TuskForce
 ```
 
 2. **Install dependencies**
